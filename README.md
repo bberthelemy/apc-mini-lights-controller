@@ -38,3 +38,7 @@ Example:
     "blink": true
 }
 ```
+
+## Issues
+- If you have the error "AttributeError: module 'rtmidi' has no attribute 'API_UNSPECIFIED'" : then try to use python-rtmidi instead of rtmidi. (no changes to the source code required, juste use pip to uninstall rtmidi and install python-rtmidi instead).
+
