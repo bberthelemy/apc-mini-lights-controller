@@ -7,6 +7,30 @@ You can use a software (sniffer) to get each key code you wan't to map.
 
 This script is not submitted to any licence, be free to adjust it to fit your own needs.
 
+## Installation
+### Python 2
+Install the folowing dependencies :
+- mido
+- python-rtmidi
+
+Using PIP :
+```
+pip install mido
+pip install python-rtmidi
+```
+
+### Python 3
+Install the folowing dependencies :
+- mido
+- python-rtmidi
+
+Using PIP :
+```
+pip install mido
+# pip uninstall rtmidi <- only if you have the issue described at the bottom of this file
+pip install python-rtmidi
+```
+
 ## Usage
 ```
 ./keymap.midi.py <json_file>
