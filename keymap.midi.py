@@ -31,7 +31,7 @@ def get_map_file_argument(argv):
     if os.path.exists(parsed_args.inputFile):       
        return parsed_args.inputFile
     else:
-        print "No such file"
+        print("No such file")
         exit(1)
 
 def read_map_file(argv):
@@ -42,11 +42,11 @@ def read_map_file(argv):
     return ""
 
 def create_msg(km):
-    if km.has_key("enabled") and km["enabled"] == False:
+    if "enabled" in km and km["enabled"] == False:
         parser.feed([0x90, km["key"], LIGHT_OFF])
     else:
         color = COLOR_MAP[km["color"]]
-        if km.has_key("blink") and km["blink"] == True:
+        if "blink" in km and km["blink"] == True:
             color += 1
         parser.feed([0x90, km["key"], color])
     return parser.get_message()
