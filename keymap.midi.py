@@ -22,20 +22,32 @@ COLOR_MAP = {
 
 parser = mido.Parser()
 
-def get_map_file_argument(argv):
+def get_arguments(argv):
     """"Creates and returns the ArgumentParser object."""
-    argParser = argparse.ArgumentParser(description='Description of your app.')
-    argParser.add_argument('inputFile',
-                    help='Path to the input file')
+    argParser = argparse.ArgumentParser(description='APC mini enlighter')
+
+    group = argParser.add_mutually_exclusive_group()
+    group.add_argument("-l", "--list", help="List port names", action="store_true")
+    group.add_argument("-i", "--input", help="Path to the input file")
+    argParser.add_argument("-p", "--port", help="Name of the port to use")
     parsed_args = argParser.parse_args(argv[1:])
-    if os.path.exists(parsed_args.inputFile):       
-       return parsed_args.inputFile
+
+    if parsed_args.list:
+        for port in mido.get_output_names():
+            print("-> \"%s\"" % port)
+        exit(0)
+
+    if parsed_args.input:
+        if os.path.exists(parsed_args.input):
+            return parsed_args
+        else:
+            print ("Input file is not valid")
+            exit(1)
     else:
-        print("No such file")
+        print ("An input file is required, please use -i option")
         exit(1)
 
-def read_map_file(argv):
-    filePath = get_map_file_argument(argv)
+def read_map_file(filePath):
     with open (filePath, "r") as myFile:
         data = json.load(myFile)
         return data
@@ -52,11 +64,13 @@ def create_msg(km):
     return parser.get_message()
 
 if __name__ == "__main__":
-    mapContent = read_map_file(sys.argv)
-    output = mido.open_output()
+    args = get_arguments(sys.argv)
+    mapContent = read_map_file(args.input)
+    if args.port:
+        output = mido.open_output(args.port)
+    else:
+        output = mido.open_output()
 
     for km in mapContent:
         msg = create_msg(km)
         output.send(msg)
-
-

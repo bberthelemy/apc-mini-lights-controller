@@ -33,14 +33,23 @@ pip install python-rtmidi
 
 ## Usage
 ```
-./keymap.midi.py <json_file>
-```
+usage: keymap.midi.py [-h] [-l | -i INPUT] [-p PORT]
 
-- json_file : your json file
+APC mini enlighter
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -l, --list            List port names
+  -i INPUT, --input INPUT
+                        Path to the input file
+  -p PORT, --port PORT  Name of the port to use
+```
 
 Example:
 ```
-./keymap.midi.py keymap.example.json
+$ ./keymap.midi.py -l
+-> "APC MINI"
+$ ./keymap.midi.py -p "APC MINI" -i keymap.example.json 
 ```
 
 ## Configuration
