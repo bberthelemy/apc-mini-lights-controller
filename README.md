@@ -7,6 +7,9 @@ You can use a software (sniffer) to get each key code you wan't to map.
 
 This script is not submitted to any licence, be free to adjust it to fit your own needs.
 
+## Demo
+- [Youtube demo video](https://youtu.be/9KhLs2uHBk8)
+
 ## Installation
 ### Python 2
 Install the folowing dependencies :
